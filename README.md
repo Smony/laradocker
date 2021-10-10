@@ -14,5 +14,6 @@ ports:
 
 run commands:
 - `docker-compose run --rm composer`
-- `docker-compose run --rm artisan`
 - `docker-compose run --rm npm`
+- `docker-compose run --rm artisan`
+- `docker-compose run --rm phpunit`
