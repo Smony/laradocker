@@ -1,0 +1,102 @@
+version: '3.8'
+
+networks:
+  laravel:
+    name: laravel
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+    container_name: nginx
+    ports:
+      - "8088:80"
+      - "443:443"
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - laravel
+
+  mysql:
+    image: mysql:5.7.32
+    container_name: mysql
+    ports:
+      - "4306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: main
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAG: dev
+      SERVICE_NAME: mysql
+    networks:
+      - laravel
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - 6379:6379
+    networks:
+      - laravel
+
+  php:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: php
+    volumes:
+      - ./src:/var/www/html
+    networks:
+      - laravel
+
+  composer:
+    image: composer:latest
+    container_name: composer
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    networks:
+      - laravel
+
+  artisan:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: artisan
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: [ "php", "artisan" ]
+    networks:
+      - laravel
+
+  npm:
+    image: node:13.7
+    container_name: npm
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: [ "npm" ]
+    networks:
+      - laravel
+
+  phpunit:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: phpunit
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: [ "/var/www/html/vendor/bin/phpunit" ]
+    networks:
+      - laravel
+
+
