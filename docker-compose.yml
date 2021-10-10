@@ -18,6 +18,7 @@ services:
     depends_on:
       - php
       - mysql
+      - redis
     networks:
       - laravel
 
@@ -96,6 +97,18 @@ services:
       - ./src:/var/www/html
     working_dir: /var/www/html
     entrypoint: [ "/var/www/html/vendor/bin/phpunit" ]
+    networks:
+      - laravel
+
+  scheduler:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: scheduler
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: [ "php", "artisan", "schedule:work" ]
     networks:
       - laravel
 
