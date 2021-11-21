@@ -1,6 +1,6 @@
 ## LaraDocker
 
-`src` directory.
+`src` project directory.
 
 install:
 - `docker-compose run --rm composer install`
