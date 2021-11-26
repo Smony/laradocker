@@ -1,6 +1,8 @@
 ## LaraDocker
 
-`src` directory.
+`src` project directory.
+
+clear project directory and `docker-compose run --rm composer create-project --prefer-dist laravel/laravel:^8.0 .`
 
 install:
 - `docker-compose run --rm composer install`
