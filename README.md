@@ -1,5 +1,7 @@
 ## LaraDocker
 
+`cp .env.example .env`
+
 `src` project directory.
 
 clear project directory and `docker-compose run --rm composer create-project --prefer-dist laravel/laravel:^8.0 .`
