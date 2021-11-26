@@ -11,7 +11,7 @@ services:
       dockerfile: nginx.dockerfile
     container_name: nginx
     ports:
-      - "8088:80"
+      - "${NGINX_PORT}:80"
       - "443:443"
     volumes:
       - ./src:/var/www/html
@@ -24,17 +24,17 @@ services:
 
   mysql:
     platform: linux/x86_64
-    image: mysql:5.7.32
+    image: mysql:${MYSQL_VERSION}
     container_name: mysql
     ports:
-      - "4306:3306"
+      - "${MYSQL_PORT}:3306"
     volumes:
       - ./mysql:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: main
-      MYSQL_USER: laravel
-      MYSQL_PASSWORD: secret
-      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       SERVICE_TAG: dev
       SERVICE_NAME: mysql
     networks:
@@ -44,7 +44,7 @@ services:
     image: redis:latest
     container_name: redis
     ports:
-      - 6379:6379
+      - "${REDIS_PORT}:6379"
     networks:
       - laravel
 
@@ -80,7 +80,7 @@ services:
       - laravel
 
   npm:
-    image: node:13.7
+    image: node:${NODE_VERSION}
     container_name: npm
     volumes:
       - ./src:/var/www/html
