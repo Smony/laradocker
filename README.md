@@ -1,4 +1,4 @@
-## LaraDocker
+## LaraDocker 🐳
 
 `cp .env.example .env`
 
