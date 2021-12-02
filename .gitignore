@@ -1,5 +1,6 @@
 mysql/*
 postgres/*
+logs/*
 .DS_Store
 .idea
 .env
