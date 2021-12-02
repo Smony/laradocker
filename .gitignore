@@ -1,3 +1,5 @@
 mysql/*
+postgres/*
 .DS_Store
 .idea
+.env

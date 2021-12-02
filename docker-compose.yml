@@ -39,8 +39,22 @@ services:
     networks:
       - laravel
 
+  postgres:
+    image: postgres:${POSTGRES_VERSION}
+    container_name: postgres
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - ./postgres:/var/lib/postgresql
+    environment:
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - laravel
+
   redis:
-    image: redis:latest
+    image: redis:${REDIS_VERSION}
     container_name: redis
     ports:
       - "${REDIS_PORT}:6379"
