@@ -1,4 +1,5 @@
-FROM php:8.0.0-fpm-alpine
+ARG PHP_VERSION
+FROM php:${PHP_VERSION}-fpm-alpine
 
 ADD ./php/www.conf /usr/local/etc/php-fpm.d/www.conf
 

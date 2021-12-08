@@ -66,6 +66,8 @@ services:
     build:
       context: .
       dockerfile: php.dockerfile
+      args:
+        PHP_VERSION: ${PHP_VERSION}
     container_name: php
     volumes:
       - ./src:/var/www/html

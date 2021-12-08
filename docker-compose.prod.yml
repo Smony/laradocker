@@ -60,6 +60,8 @@ services:
     build:
       context: .
       dockerfile: php.prod.dockerfile
+      args:
+        PHP_VERSION: ${PHP_VERSION}
     container_name: php
     networks:
       - laravel
