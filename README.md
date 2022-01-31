@@ -20,7 +20,7 @@ cp .env.example .env
 ```shell
 docker-compose up -d nginx
 ```
-**nginx** contains **php**, **mysql**, **redis**, **artisan**, **composer**, **composer**, **npm**, **phpunit**  
+**nginx** contains **php**, **mysql**, **redis**, **artisan**, **composer**, **npm**, **phpunit**  
 
 There are more containers **postgres**, **phpmyadmin**
 ```shell
